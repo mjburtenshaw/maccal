@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"gitlab.com/mjburtenshaw/maccal/auth"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/calendar/v3"
@@ -100,7 +101,7 @@ func getToken(config *oauth2.Config, tokenFile string) (*oauth2.Token, error) {
     if err == nil {
         return tok, nil
     }
-    tok = getTokenFromWeb(config)
+    tok = auth.GetTokenFromWeb(config)
     if err := saveToken(tokenFile, tok); err != nil {
         return nil, err
     }
@@ -116,23 +117,6 @@ func tokenFromFile(file string) (*oauth2.Token, error) {
     tok := &oauth2.Token{}
     err = json.NewDecoder(f).Decode(tok)
     return tok, err
-}
-
-func getTokenFromWeb(config *oauth2.Config) *oauth2.Token {
-    authURL := config.AuthCodeURL("state-token", oauth2.AccessTypeOffline)
-    fmt.Printf("Go to the following link in your browser, then type the "+
-        "authorization code: \n%v\n", authURL)
-
-    var authCode string
-    if _, err := fmt.Scan(&authCode); err != nil {
-        log.Fatalf("Unable to read authorization code: %v", err)
-    }
-
-    tok, err := config.Exchange(context.Background(), authCode)
-    if err != nil {
-        log.Fatalf("Unable to retrieve token from web: %v", err)
-    }
-    return tok
 }
 
 func saveToken(file string, token *oauth2.Token) error {
