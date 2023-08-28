@@ -144,8 +144,3 @@ func saveToken(file string, token *oauth2.Token) error {
     defer f.Close()
     return json.NewEncoder(f).Encode(token)
 }
-
-
-// Helper functions to manage tokens (tokenFromFile, getTokenFromWeb, saveToken)
-// are not shown here for brevity.
-
