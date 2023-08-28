@@ -11,6 +11,7 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/calendar/v3"
+	"google.golang.org/api/option"
 )
 
 func main() {
@@ -71,10 +72,11 @@ func main() {
     }
 
     // Create a new Calendar client with the token
-    client := config.Client(context.Background(), tok)
+    // client := config.Client(context.Background(), tok)
+    ctx := context.Background()
 
     // Create a Calendar service
-    srv, err := calendar.New(client)
+    srv, err := calendar.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, tok)))
     if err != nil {
         log.Fatalf("Unable to create Calendar service: %v", err)
     }
