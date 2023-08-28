@@ -82,9 +82,13 @@ func main() {
     }
 
     // Use the srv object to interact with the Google Calendar API
-    // For example, you can list calendar events using srv.Events.List()
-    events := srv.Events.List("primary")
-    fmt.Println(events)
+    res, err := srv.CalendarList.List().Do()
+    if err != nil {
+        log.Fatalf("💀 An error occured: %v", err)
+    }
+    for _, value := range res.Items {
+        fmt.Println(value.Id)
+    }
 
     // Wait for a signal to stop the program (e.g., Ctrl+C)
     // This is just an example. You might have other logic to control program termination.
