@@ -78,7 +78,7 @@ func main() {
     // Create a Calendar service
     srv, err := calendar.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, tok)))
     if err != nil {
-        log.Fatalf("Unable to create Calendar service: %v", err)
+        log.Fatalf("💀 Unable to create Calendar service: %v", err)
     }
 
     // Use the srv object to interact with the Google Calendar API
