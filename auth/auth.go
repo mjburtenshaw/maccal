@@ -23,7 +23,7 @@ func GetToken(config *oauth2.Config, tokenFile string) (*oauth2.Token, error) {
 }
 
 func SaveToken(file string, token *oauth2.Token) error {
-    fmt.Printf("Saving credential file to: %s\n", file)
+    fmt.Printf("💾 Saving credential file to: %s\n", file)
     f, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
     if err != nil {
         return err
@@ -45,17 +45,17 @@ func tokenFromFile(file string) (*oauth2.Token, error) {
 
 func getTokenFromWeb(config *oauth2.Config) *oauth2.Token {
     authURL := config.AuthCodeURL("state-token", oauth2.AccessTypeOffline)
-    fmt.Printf("Go to the following link in your browser, then type the "+
+    fmt.Printf("🔗 Go to the following link in your browser, then type the "+
         "authorization code: \n%v\n", authURL)
 
     var authCode string
     if _, err := fmt.Scan(&authCode); err != nil {
-        log.Fatalf("Unable to read authorization code: %v", err)
+        log.Fatalf("💀 Unable to read authorization code: %v", err)
     }
 
     tok, err := config.Exchange(context.Background(), authCode)
     if err != nil {
-        log.Fatalf("Unable to retrieve token from web: %v", err)
+        log.Fatalf("💀 Unable to retrieve token from web: %v", err)
     }
     return tok
 }
