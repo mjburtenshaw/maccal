@@ -15,18 +15,18 @@ func StartAuthCallbackServer(config *oauth2.Config, tokenFile string) {
 
 		tok, err := config.Exchange(context.Background(), code)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("⛔️ Unable to exchange code for token: %v", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("maccal: ⛔️ Unable to exchange code for token: %v", err), http.StatusInternalServerError)
 			return
 	}
 	
 		// Save the token to a file (or your preferred storage)
 		if err := SaveToken(tokenFile, tok); err != nil {
-			http.Error(w, fmt.Sprintf("⛔️ Unable to save token: %v", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("maccal: ⛔️ Unable to save token: %v", err), http.StatusInternalServerError)
 			return
 		}
 	
 		// Display a success message
-		w.Write([]byte("🎉 Authentication successful! You can close this window now."))
+		w.Write([]byte("maccal: 🎉 Authentication successful! You can close this window now."))
         
         // TODO: continue the process
 	})

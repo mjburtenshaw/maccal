@@ -21,7 +21,7 @@ func GetToken(config *oauth2.Config, tokenFile string) (*oauth2.Token, error) {
 }
 
 func SaveToken(file string, token *oauth2.Token) error {
-    fmt.Printf("💾 Saving credential file to: %s\n", file)
+    fmt.Printf("maccal: 💾 Saving credential file to: %s\n", file)
     f, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
     if err != nil {
         return err
