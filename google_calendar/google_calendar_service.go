@@ -46,6 +46,8 @@ func InitService() *calendar.Service {
         log.Fatalf("maccal: 💀 Unable to get token: %v", err)
     }
 
+    log.Println("🪵")
+
     // Create a new Calendar client with the token
     // client := config.Client(context.Background(), tok)
     ctx := context.Background()

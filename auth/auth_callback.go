@@ -26,7 +26,7 @@ func StartAuthCallbackServer(config *oauth2.Config, tokenFile string) {
 		}
 	
 		// Display a success message
-		w.Write([]byte("maccal: 🎉 Authentication successful! You can close this window now."))
+		w.Write([]byte("🎉 Authentication successful! You can close this window now."))
         
         // TODO: continue the process
 	})
